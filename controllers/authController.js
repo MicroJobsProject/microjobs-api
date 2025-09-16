@@ -50,7 +50,7 @@ export async function register(req, res) {
 
     res.status(201).json({
       message: "Successfully registered user",
-      token,
+      accessToken: token,
       user: {
         id: user._id,
         username: user.username,
