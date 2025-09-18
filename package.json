@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js",
-    "initDB": "node initDB.js"
+    "dev": "cross-env NODE_ENV=development nodemon server.js",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "initDB": "cross-env NODE_ENV=development node initDB.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -16,6 +16,7 @@
     "mongoose": "^8.18.1"
   },
   "devDependencies": {
+    "cross-env": "^10.0.0",
     "nodemon": "^3.1.10"
   }
 }
