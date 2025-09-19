@@ -71,6 +71,8 @@ async function initAdverts() {
       price: 0,
       offer: true,
       category: "plumbing",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Ipsum",
@@ -78,6 +80,8 @@ async function initAdverts() {
       price: 9.99,
       offer: false,
       category: "electrician",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Dolor sit",
@@ -85,6 +89,8 @@ async function initAdverts() {
       price: 30,
       offer: true,
       category: "gardening",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit.",
     },
     {
       name: "Amet",
@@ -92,6 +98,8 @@ async function initAdverts() {
       price: 10,
       offer: false,
       category: "plumbing",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque.",
     },
     {
       name: "Consectetur",
@@ -99,6 +107,8 @@ async function initAdverts() {
       price: 15,
       offer: false,
       category: "plumbing",
+      description:
+        "Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Adiscing elit",
@@ -106,6 +116,8 @@ async function initAdverts() {
       price: 55,
       offer: false,
       category: "painting",
+      description:
+        "Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Pellentesque",
@@ -113,6 +125,8 @@ async function initAdverts() {
       price: 40,
       offer: true,
       category: "electrician",
+      description:
+        "Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Vestibullum",
@@ -120,6 +134,8 @@ async function initAdverts() {
       price: 5,
       offer: true,
       category: "pets",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam.",
     },
     {
       name: "Curibator",
@@ -127,6 +143,8 @@ async function initAdverts() {
       price: 10,
       offer: true,
       category: "gardening",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo.",
     },
     {
       name: "Sed dapibus",
@@ -134,6 +152,8 @@ async function initAdverts() {
       price: 10,
       offer: false,
       category: "cleaning",
+      description:
+        "Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Metus",
@@ -141,6 +161,8 @@ async function initAdverts() {
       price: 12,
       offer: true,
       category: "gardening",
+      description:
+        "Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque.",
     },
     {
       name: "At laboris",
@@ -148,6 +170,8 @@ async function initAdverts() {
       price: 35,
       offer: false,
       category: "transport",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Auctor",
@@ -155,6 +179,8 @@ async function initAdverts() {
       price: 25,
       offer: true,
       category: "transport",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Mauris imperdiet lacus",
@@ -162,6 +188,8 @@ async function initAdverts() {
       price: 7,
       offer: true,
       category: "private classes",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
     {
       name: "Sapien turpis congue nunc",
@@ -169,6 +197,8 @@ async function initAdverts() {
       price: 30,
       offer: true,
       category: "painting",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt.",
     },
     {
       name: "Nisl ut porttitor bibendum eros",
@@ -176,6 +206,8 @@ async function initAdverts() {
       price: 8,
       offer: false,
       category: "technology",
+      description:
+        "Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
   ]);
   console.log(`+ INSERTED ${insertResult.length} adverts`);

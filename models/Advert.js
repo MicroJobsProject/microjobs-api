@@ -12,6 +12,7 @@ const advertSchema = new Schema(
     },
     price: { type: Number, required: true, min: 0, max: 99999 },
     offer: { type: Boolean, required: true },
+    description: { type: String, maxLength: 640, required: true },
     category: { type: String, required: true },
     photo: { type: String },
   },
