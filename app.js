@@ -6,6 +6,7 @@ import cors from "cors";
 //NATIVE
 import connectMongoose from "./lib/connectMongoose.js";
 import { register, login, logout } from "./controllers/authController.js";
+import { getAdverts } from "./controllers/advertsController.js";
 
 /**
  * MONGODB CONNECTION
@@ -35,6 +36,7 @@ app.use(express.json());
 app.post("/api/auth/register", register);
 app.post("/api/auth/login", login);
 app.post("/api/auth/logout", logout);
+app.get("/api/adverts", getAdverts);
 
 /**
  * EXPORT
