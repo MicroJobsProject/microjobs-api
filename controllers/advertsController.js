@@ -1,5 +1,6 @@
 // NATIVE
 import Advert from "../models/Advert.js";
+import User from "../models/User.js";
 
 export async function getAdverts(req, res, next) {
   try {
@@ -14,6 +15,7 @@ export async function getAdverts(req, res, next) {
     const filterByPriceMax = req.query.max;
     const filterByOffer = req.query.offer;
     const filterByCategory = req.query.category;
+    const filterByOwner = req.query.owner;
     const fields = req.query.fields;
 
     if (filterByName) {
@@ -41,6 +43,14 @@ export async function getAdverts(req, res, next) {
       filter.category = { $in: category };
     }
 
+    if (filterByOwner) {
+      const user = await User.findOne({ username: filterByOwner });
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      filter.owner = user._id;
+    }
+
     const adverts = await Advert.list(filter, limit, skip, sort, fields);
     const count = await Advert.countDocuments(filter);
     const results = {
@@ -52,7 +62,7 @@ export async function getAdverts(req, res, next) {
     };
 
     if (results.page > results.totalPages) {
-      res.redirect(`/api/adverts?page=${results.totalPages}`);
+      return res.redirect(`/api/adverts?page=${results.totalPages}`);
     }
 
     res.json(results);
