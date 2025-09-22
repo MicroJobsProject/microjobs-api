@@ -70,3 +70,24 @@ export async function getAdverts(req, res, next) {
     next(error);
   }
 }
+
+export async function createAdvert(req, res, next) {
+  try {
+    const advertData = req.body;
+
+    const userId = req.user.id;
+    //TODO advert data validation
+
+    // create advert in memory
+    const advert = new Advert(advertData);
+    advert.image = req.file?.filename;
+    advert.owner = userId;
+
+    // save advert
+    const savedAdvert = await advert.save();
+
+    res.status(201).json({ result: savedAdvert });
+  } catch (error) {
+    next(error);
+  }
+}
