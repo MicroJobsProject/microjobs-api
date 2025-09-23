@@ -7,6 +7,7 @@ import readline from "node:readline/promises";
 import connectMongoose from "./lib/connectMongoose.js";
 import User from "./models/User.js";
 import Advert from "./models/Advert.js";
+import Category from "./models/Category.js";
 
 const connection = await connectMongoose();
 console.log(`Connected to MongoDB: ${connection.name}`);
@@ -19,6 +20,7 @@ if (answer.toLowerCase() !== "y") {
 }
 
 await initUsers();
+await initCategories();
 await initAdverts();
 await connection.close();
 
@@ -46,7 +48,34 @@ async function initUsers() {
   ];
 
   const insertResult = await User.bulkSave(users);
-  console.log(`+ INSERTED ${insertResult.length} users`);
+  console.log(`+ INSERTED ${insertResult.insertedCount} users`);
+}
+
+async function initCategories() {
+  /**
+   * DELETE ALL CATEGORIES
+   */
+  const deleteResult = await Category.deleteMany();
+  console.log(`- DELETED ${deleteResult.deletedCount} categories`);
+
+  /**
+   * CREATE CATEGORIES
+   */
+  const insertResult = await Category.insertMany([
+    { name: "Caring", icon: "eye_tracking" },
+    { name: "Cleaning", icon: "cleaning" },
+    { name: "Electrician", icon: "electric_bolt" },
+    { name: "Gardening", icon: "local_florist" },
+    { name: "Painting", icon: "format_paint" },
+    { name: "Personal Training", icon: "fitness_center" },
+    { name: "Pets", icon: "pets" },
+    { name: "Plumbing", icon: "plumbing" },
+    { name: "Private Classes", icon: "school" },
+    { name: "Technology", icon: "eye_tracking" },
+    { name: "Transport", icon: "local_shipping" },
+    { name: "Video & Photography", icon: "videocam" },
+  ]);
+  console.log(`+ INSERTED ${insertResult.length} categories`);
 }
 
 async function initAdverts() {

@@ -1,5 +1,6 @@
 // NATIVE
 import Advert from "../models/Advert.js";
+import Category from "../models/Category.js";
 import User from "../models/User.js";
 
 export async function getAdverts(req, res, next) {
@@ -61,7 +62,17 @@ export async function getAdverts(req, res, next) {
       totalPages: Math.ceil(count / limit),
     };
 
-    res.json(results);
+    res.status.json(results);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getAdvertCategories(req, res, next) {
+  try {
+    const categories = await Category.find();
+
+    res.json(categories);
   } catch (error) {
     next(error);
   }
