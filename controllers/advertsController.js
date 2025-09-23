@@ -61,10 +61,6 @@ export async function getAdverts(req, res, next) {
       totalPages: Math.ceil(count / limit),
     };
 
-    if (results.page > results.totalPages) {
-      return res.redirect(`/api/adverts?page=${results.totalPages}`);
-    }
-
     res.json(results);
   } catch (error) {
     next(error);
