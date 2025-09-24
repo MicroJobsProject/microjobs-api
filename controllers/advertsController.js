@@ -62,7 +62,7 @@ export async function getAdverts(req, res, next) {
       totalPages: Math.ceil(count / limit),
     };
 
-    res.status.json(results);
+    res.json(results);
   } catch (error) {
     next(error);
   }
