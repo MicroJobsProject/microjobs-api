@@ -71,7 +71,7 @@ async function initCategories() {
     { name: "Pets", icon: "pets" },
     { name: "Plumbing", icon: "plumbing" },
     { name: "Private Classes", icon: "school" },
-    { name: "Technology", icon: "eye_tracking" },
+    { name: "Technology", icon: "devices" },
     { name: "Transport", icon: "local_shipping" },
     { name: "Video & Photography", icon: "videocam" },
   ]);
