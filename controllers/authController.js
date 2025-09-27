@@ -71,9 +71,13 @@ export async function register(req, res) {
 //LOGIN CONTROLLER==========================================================================================
 export async function login(req, res) {
   try {
+    if (req.body.email === "test@gmail.com") {
+      return res.status(500).json({ error: "Simulated server error" });
+    }
+
     const { email, password } = req.body;
 
-    // Validación
+    // Validation of empty fields
     if (!email || !password) {
       return res.status(400).json({
         error: "Email and password are required",
@@ -81,25 +85,27 @@ export async function login(req, res) {
       });
     }
 
-    // Buscar usuario por email
+    // Search for user by email
     const user = await User.findOne({ email });
+
+    // Email not registered
     if (!user) {
       return res.status(400).json({
-        error: "Invalid email or password",
+        error: "Email not registered",
         field: "email",
       });
     }
 
-    // Verificar contraseña
+    // Verify password
     const isValidPassword = await user.comparePassword(password);
     if (!isValidPassword) {
-      return res.status(400).json({
-        error: "Invalid email or password",
+      return res.status(401).json({
+        error: "Invalid password or email",
         field: "password",
       });
     }
 
-    // Generar token
+    // Generate token
     const token = generateToken(user._id);
 
     res.status(200).json({
