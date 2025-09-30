@@ -24,7 +24,11 @@ export const authenticateToken = async (req, res, next) => {
       });
     }
 
-    req.user = user;
+    req.user = {
+      id: user._id.toString(),
+      username: user.username,
+      email: user.email,
+    };
     next();
   } catch (error) {
     console.error("Auth middleware error:", error);
