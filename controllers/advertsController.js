@@ -98,3 +98,23 @@ export async function createAdvert(req, res, next) {
     next(error);
   }
 }
+
+export async function getAdvertDetail(req, res, next) {
+  try {
+    //const userId = req.apiUserId;
+    const advertId = req.params.advertId;
+
+    const advert = await Advert.findOne({_id: advertId});
+
+    if (!advert) {
+      return res.status(404).json({
+        error: "Advert not found",
+        // field: "password", // No estamos seguros si usarlo o no
+      });
+    }
+
+    res.status(201).json({ result: advert });
+  } catch (error) {
+    next(error)
+  }
+}

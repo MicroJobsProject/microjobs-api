@@ -10,8 +10,9 @@ import {
   getAdverts,
   createAdvert,
   getAdvertCategories,
-  updateAdvert,
-  deleteAdvert,
+  //updateAdvert,
+  //deleteAdvert,
+  getAdvertDetail,
 } from "./controllers/advertsController.js";
 import { authenticateToken } from "./middleware/auth.js";
 /**
@@ -44,9 +45,10 @@ app.post("/api/auth/login", login);
 app.post("/api/auth/logout", logout);
 app.get("/api/adverts", getAdverts);
 app.post("/api/adverts", authenticateToken, createAdvert);
-app.put("/api/adverts", authenticateToken, updateAdvert);
-app.delete("/api/adverts", authenticateToken, deleteAdvert);
+//app.put("/api/adverts", authenticateToken, updateAdvert);
+//app.delete("/api/adverts", authenticateToken, deleteAdvert);
 app.get("/api/adverts/categories", getAdvertCategories);
+app.get("/api/adverts/:advertId", getAdvertDetail);
 
 /**
  * EXPORT
