@@ -13,7 +13,7 @@ export async function register(req, res) {
   try {
     const { username, email, password } = req.body;
 
-    //Validación
+    // Validation
     if (!username || !email || !password) {
       return res.status(400).json({
         error: "All fields are required",
@@ -28,7 +28,7 @@ export async function register(req, res) {
       });
     }
 
-    // Verificar que si el Usuario y Email existen
+    // Verify that the User and Email exist
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
       return res.status(400).json({
@@ -45,11 +45,11 @@ export async function register(req, res) {
       });
     }
 
-    // Crear usuario
+    // Create user
     const user = new User({ username, email, password });
     await user.save();
 
-    // Generar Token
+    // Generate Token
     const token = generateToken(user._id);
 
     res.status(201).json({

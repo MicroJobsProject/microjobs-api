@@ -7,6 +7,13 @@ import cors from "cors";
 import connectMongoose from "./lib/connectMongoose.js";
 import { register, login, logout } from "./controllers/authController.js";
 import {
+  getProfile,
+  updateProfile,
+  changePasswordController,
+  deleteAccountController,
+  getUserStats,
+} from "./controllers/userController.js";
+import {
   getAdverts,
   createAdvert,
   getAdvertCategories,
@@ -39,12 +46,27 @@ app.use(express.json());
 /**
  * ROUTES
  */
+// Auth routes
 app.post("/api/auth/register", register);
 app.post("/api/auth/login", login);
 app.post("/api/auth/logout", logout);
+
+// User profile routes (protected)
+app.get("/api/user/profile", authenticateToken, getProfile);
+app.put("/api/user/profile", authenticateToken, updateProfile);
+app.put("/api/user/password", authenticateToken, changePasswordController);
+app.delete("/api/user/account", authenticateToken, deleteAccountController);
+app.get("/api/user/stats", authenticateToken, getUserStats);
+
+// Adverts routes
 app.get("/api/adverts", getAdverts);
 app.post("/api/adverts", authenticateToken, createAdvert);
-app.put("/api/adverts", authenticateToken, updateAdvert);
+
+//Temporary code to fix errors=================================================
+app.put("/api/adverts/:id", authenticateToken, updateAdvert);
+app.delete("/api/adverts/:id", authenticateToken, deleteAdvert);
+//=============================================================================
+
 app.delete("/api/adverts", authenticateToken, deleteAdvert);
 app.get("/api/adverts/categories", getAdvertCategories);
 

@@ -98,3 +98,57 @@ export async function createAdvert(req, res, next) {
     next(error);
   }
 }
+
+//Temporary code to fix errors================================================
+export async function updateAdvert(req, res, next) {
+  try {
+    const { id } = req.params;
+    const advertData = req.body;
+
+    const advert = await Advert.findById(id);
+
+    if (!advert) {
+      return res.status(404).json({ error: "Advert not found" });
+    }
+
+    if (advert.owner.toString() !== req.user.id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "Not authorized to update this advert" });
+    }
+
+    const updatedAdvert = await Advert.findByIdAndUpdate(id, advertData, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.json({ result: updatedAdvert });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteAdvert(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const advert = await Advert.findById(id);
+
+    if (!advert) {
+      return res.status(404).json({ error: "Advert not found" });
+    }
+
+    if (advert.owner.toString() !== req.user.id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "Not authorized to delete this advert" });
+    }
+
+    await Advert.findByIdAndDelete(id);
+
+    res.json({ message: "Advert deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+}
+//============================================================================
