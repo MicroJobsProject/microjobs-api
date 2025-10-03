@@ -1,11 +1,16 @@
 //DEPENDENCIES
-import path from "node:path";
 import express from "express";
 import cors from "cors";
 
 //NATIVE
 import connectMongoose from "./lib/connectMongoose.js";
-import { register, login, logout } from "./controllers/authController.js";
+import {
+  register,
+  login,
+  logout,
+  forgotPassword,
+  resetPassword,
+} from "./controllers/authController.js";
 import {
   getProfile,
   updateProfile,
@@ -50,6 +55,8 @@ app.use(express.json());
 app.post("/api/auth/register", register);
 app.post("/api/auth/login", login);
 app.post("/api/auth/logout", logout);
+app.post("/api/auth/forgot-password", forgotPassword);
+app.post("/api/auth/reset-password", resetPassword);
 
 // User profile routes (protected)
 app.get("/api/user/profile", authenticateToken, getProfile);
