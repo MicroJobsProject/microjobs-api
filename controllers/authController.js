@@ -73,10 +73,6 @@ export async function register(req, res) {
 //LOGIN CONTROLLER==========================================================================================
 export async function login(req, res) {
   try {
-    if (req.body.email === "test@gmail.com") {
-      return res.status(500).json({ error: "Simulated server error" });
-    }
-
     const { email, password } = req.body;
 
     // Validation of empty fields
