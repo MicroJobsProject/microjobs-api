@@ -112,10 +112,10 @@ GET    /api/adverts/categories    - Listar categorías
 ### 1. Requisitos de Software
 
 - **[Node.js](https://nodejs.org/en/download/)** (**Node:** >=v24.8.0)
-- **[Git](https://git-scm.com/downloads)** (\*2.47.1.windows.1\*\*)
-- **[Visual Studio Code](https://code.visualstudio.com/)** (\*1.99.0\*\*)
-- **[MongoDB](https://www.mongodb.com/try/download/community)** (>=v6.0)
-- **[microjobs (Frontend)](https://github.com/MicroJobsProject/microjobs.git)**
+- **[Git](https://git-scm.com/downloads)** (2.48.1)
+- **[Visual Studio Code](https://code.visualstudio.com/)** (1.104.2)
+- **[MongoDB](https://www.mongodb.com/try/download/community)** (v8.0.14)
+- **[MicroJobs (Frontend)](https://github.com/MicroJobsProject/microjobs.git)**
 
 > **📝 Nota:** Esta API está diseñada para trabajar en conjunto con el frontend **MicroJobs**. Para una experiencia completa, es necesario tener ambos proyectos en funcionamiento.
 
@@ -267,7 +267,7 @@ Para un entorno de producción real:
 
 ## Recursos del Proyecto
 
-- **Frontend (React):** 🔗 [microjobs](https://github.com/MicroJobsProject/microjobs)
+- **Frontend (React):** 🔗 [MicroJobs](https://github.com/MicroJobsProject/microjobs)
 
 - **Documentación de Mongoose:** 📚 [mongoosejs.com](https://mongoosejs.com)
 - **Documentación de Express:** 📚 [expressjs.com](https://expressjs.com)
