@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 
 //NATIVE
+import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import connectMongoose from "./lib/connectMongoose.js";
 import {
   register,
@@ -76,6 +77,9 @@ app.delete("/api/adverts/:id", authenticateToken, deleteAdvert);
 
 app.delete("/api/adverts", authenticateToken, deleteAdvert);
 app.get("/api/adverts/categories", getAdvertCategories);
+
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 /**
  * EXPORT
