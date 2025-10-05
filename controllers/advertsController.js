@@ -99,7 +99,6 @@ export async function createAdvert(req, res, next) {
   }
 }
 
-//Temporary code to fix errors================================================
 export async function updateAdvert(req, res, next) {
   try {
     const { id } = req.params;
@@ -151,4 +150,47 @@ export async function deleteAdvert(req, res, next) {
     next(error);
   }
 }
-//============================================================================
+
+export async function deleteMultipleAdverts(req, res, next) {
+  try {
+    const { advertIds } = req.body;
+
+    if (!Array.isArray(advertIds) || advertIds.length === 0) {
+      return res.status(400).json({
+        error: "advertIds must be a non-empty array",
+      });
+    }
+
+    const adverts = await Advert.find({
+      _id: { $in: advertIds },
+    });
+
+    const unauthorizedAdverts = adverts.filter(
+      (advert) => advert.owner.toString() !== req.user.id.toString()
+    );
+
+    if (unauthorizedAdverts.length > 0) {
+      return res.status(403).json({
+        error: "Not authorized to delete some of these adverts",
+      });
+    }
+
+    if (adverts.length !== advertIds.length) {
+      return res.status(404).json({
+        error: "Some adverts were not found",
+      });
+    }
+
+    const result = await Advert.deleteMany({
+      _id: { $in: advertIds },
+      owner: req.user.id,
+    });
+
+    res.json({
+      message: `${result.deletedCount} adverts deleted successfully`,
+      deletedCount: result.deletedCount,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
