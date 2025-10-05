@@ -25,6 +25,7 @@ import {
   getAdvertCategories,
   updateAdvert,
   deleteAdvert,
+  deleteMultipleAdverts,
 } from "./controllers/advertsController.js";
 import { authenticateToken } from "./middleware/auth.js";
 /**
@@ -67,16 +68,12 @@ app.delete("/api/user/account", authenticateToken, deleteAccountController);
 app.get("/api/user/stats", authenticateToken, getUserStats);
 
 // Adverts routes
+app.get("/api/adverts/categories", getAdvertCategories);
+app.post("/api/adverts/bulk-delete", authenticateToken, deleteMultipleAdverts);
 app.get("/api/adverts", getAdverts);
 app.post("/api/adverts", authenticateToken, createAdvert);
-
-//Temporary code to fix errors=================================================
 app.put("/api/adverts/:id", authenticateToken, updateAdvert);
 app.delete("/api/adverts/:id", authenticateToken, deleteAdvert);
-//=============================================================================
-
-app.delete("/api/adverts", authenticateToken, deleteAdvert);
-app.get("/api/adverts/categories", getAdvertCategories);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
