@@ -26,6 +26,7 @@ import {
   updateAdvert,
   deleteAdvert,
   deleteMultipleAdverts,
+  getAdvertById,
 } from "./controllers/advertsController.js";
 import { authenticateToken } from "./middleware/auth.js";
 import upload from "./middleware/upload.js";
@@ -72,6 +73,8 @@ app.get("/api/user/stats", authenticateToken, getUserStats);
 app.get("/api/adverts/categories", getAdvertCategories);
 app.post("/api/adverts/bulk-delete", authenticateToken, deleteMultipleAdverts);
 app.get("/api/adverts", getAdverts);
+app.post("/api/adverts", authenticateToken, createAdvert);
+app.get("/api/adverts/:id", getAdvertById);
 app.post(
   "/api/adverts",
   authenticateToken,

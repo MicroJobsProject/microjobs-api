@@ -68,6 +68,20 @@ export async function getAdverts(req, res, next) {
   }
 }
 
+export async function getAdvertById(req, res, next) {
+  try {
+    const advertId = req.params.id;
+    const advert = await Advert.findOne({ _id: advertId });
+
+    if (!advert) {
+      return res.status(404).json({ error: "Advert not found" });
+    }
+    res.json(advert);
+  } catch (error) {
+    next(error);
+  }
+}
+
 export async function getAdvertCategories(req, res, next) {
   try {
     const categories = await Category.find();
