@@ -71,7 +71,10 @@ export async function getAdverts(req, res, next) {
 export async function getAdvertById(req, res, next) {
   try {
     const advertId = req.params.id;
-    const advert = await Advert.findOne({ _id: advertId });
+    const advert = await Advert.findOne({ _id: advertId }).populate(
+      "owner",
+      "_id username"
+    );
 
     if (!advert) {
       return res.status(404).json({ error: "Advert not found" });
