@@ -26,6 +26,7 @@ import {
   updateAdvert,
   deleteAdvert,
   deleteMultipleAdverts,
+  getAdvertById,
 } from "./controllers/advertsController.js";
 import { authenticateToken } from "./middleware/auth.js";
 /**
@@ -72,6 +73,7 @@ app.get("/api/adverts/categories", getAdvertCategories);
 app.post("/api/adverts/bulk-delete", authenticateToken, deleteMultipleAdverts);
 app.get("/api/adverts", getAdverts);
 app.post("/api/adverts", authenticateToken, createAdvert);
+app.get("/api/adverts/:id", getAdvertById);
 app.put("/api/adverts/:id", authenticateToken, updateAdvert);
 app.delete("/api/adverts/:id", authenticateToken, deleteAdvert);
 
