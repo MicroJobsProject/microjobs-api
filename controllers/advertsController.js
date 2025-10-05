@@ -87,7 +87,7 @@ export async function createAdvert(req, res, next) {
 
     // create advert in memory
     const advert = new Advert(advertData);
-    advert.image = req.file?.filename;
+    advert.photo = "/uploads/" + req.file?.filename;
     advert.owner = userId;
 
     // save advert
@@ -99,22 +99,98 @@ export async function createAdvert(req, res, next) {
   }
 }
 
-export async function getAdvertDetail(req, res, next) {
+export async function updateAdvert(req, res, next) {
   try {
-    //const userId = req.apiUserId;
-    const advertId = req.params.advertId;
+    const { id } = req.params;
+    const advertData = req.body;
 
-    const advert = await Advert.findOne({_id: advertId});
+    const advert = await Advert.findById(id);
 
     if (!advert) {
-      return res.status(404).json({
-        error: "Advert not found",
-        // field: "password", // No estamos seguros si usarlo o no
+      return res.status(404).json({ error: "Advert not found" });
+    }
+
+    if (advert.owner.toString() !== req.user.id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "Not authorized to update this advert" });
+    }
+
+    const updatedAdvert = await Advert.findByIdAndUpdate(id, advertData, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.json({ result: updatedAdvert });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteAdvert(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    const advert = await Advert.findById(id);
+
+    if (!advert) {
+      return res.status(404).json({ error: "Advert not found" });
+    }
+
+    if (advert.owner.toString() !== req.user.id.toString()) {
+      return res
+        .status(403)
+        .json({ error: "Not authorized to delete this advert" });
+    }
+
+    await Advert.findByIdAndDelete(id);
+
+    res.json({ message: "Advert deleted successfully" });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteMultipleAdverts(req, res, next) {
+  try {
+    const { advertIds } = req.body;
+
+    if (!Array.isArray(advertIds) || advertIds.length === 0) {
+      return res.status(400).json({
+        error: "advertIds must be a non-empty array",
       });
     }
 
-    res.status(201).json({ result: advert });
+    const adverts = await Advert.find({
+      _id: { $in: advertIds },
+    });
+
+    const unauthorizedAdverts = adverts.filter(
+      (advert) => advert.owner.toString() !== req.user.id.toString()
+    );
+
+    if (unauthorizedAdverts.length > 0) {
+      return res.status(403).json({
+        error: "Not authorized to delete some of these adverts",
+      });
+    }
+
+    if (adverts.length !== advertIds.length) {
+      return res.status(404).json({
+        error: "Some adverts were not found",
+      });
+    }
+
+    const result = await Advert.deleteMany({
+      _id: { $in: advertIds },
+      owner: req.user.id,
+    });
+
+    res.json({
+      message: `${result.deletedCount} adverts deleted successfully`,
+      deletedCount: result.deletedCount,
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 }
