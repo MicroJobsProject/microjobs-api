@@ -26,6 +26,7 @@ import {
   deleteAdvert,
 } from "./controllers/advertsController.js";
 import { authenticateToken } from "./middleware/auth.js";
+import upload from "./middleware/upload.js";
 /**
  * MONGODB CONNECTION
  */
@@ -47,7 +48,7 @@ app.use(
   })
 );
 app.use(express.json());
-
+app.use("/uploads", express.static("uploads"));
 /**
  * ROUTES
  */
@@ -67,7 +68,12 @@ app.get("/api/user/stats", authenticateToken, getUserStats);
 
 // Adverts routes
 app.get("/api/adverts", getAdverts);
-app.post("/api/adverts", authenticateToken, createAdvert);
+app.post(
+  "/api/adverts",
+  authenticateToken,
+  upload.single("photo"),
+  createAdvert
+);
 
 //Temporary code to fix errors=================================================
 app.put("/api/adverts/:id", authenticateToken, updateAdvert);
