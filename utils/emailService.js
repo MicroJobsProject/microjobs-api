@@ -95,3 +95,46 @@ export async function sendPasswordResetEmail({ email, username, resetUrl }) {
     throw error;
   }
 }
+
+/**
+ * SEND CONTACT MESSAGE TO AD OWNER
+ */
+
+export async function sendContactMessageEmail({
+  adTitle,
+  adOwnerEmail,
+  senderName,
+  senderEmail,
+  message,
+  username,
+}) {
+  const transporter = await getTransporter();
+
+  const mailOptions = {
+    from: `${senderName} <${senderEmail}>`,
+    to: adOwnerEmail,
+    subject: `Usuario ${username} te mandó un mensaje por "${adTitle}"`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2>Nuevo mensaje de contacto</h2>
+        <p><strong>Nombre:</strong> ${senderName}</p>
+        <p><strong>Email:</strong> ${senderEmail}</p>
+        <hr>
+        <p><strong>Mensaje:</strong></p>
+        <p style="background:#f9f9f9;padding:15px;border-radius:6px;">${message}</p>
+        <hr>
+        <p style="color:#666;font-size:12px;">Este mensaje fue enviado desde el formulario de contacto del anuncio "${adTitle}".</p>
+      </div>
+    `,
+    text: `Nuevo mensaje de contacto\n\nDe: ${senderName} (${senderEmail})\n\nAnuncio: ${adTitle}\n\nMensaje:\n${message}`,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Mensaje de contacto enviado a:", adOwnerEmail);
+    return info;
+  } catch (error) {
+    console.error("Error enviando mensaje de contacto:", error);
+    throw error;
+  }
+}
