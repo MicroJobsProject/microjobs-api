@@ -95,3 +95,52 @@ export async function sendPasswordResetEmail({ email, username, resetUrl }) {
     throw error;
   }
 }
+
+/**
+ * SEND CONTACT MESSAGE TO AD OWNER
+ */
+export async function sendContactMessageEmail({
+  adTitle,
+  adOwnerEmail,
+  senderName,
+  senderEmail,
+  subject,
+  message,
+  username,
+}) {
+  const transporter = await getTransporter();
+
+  const mailOptions = {
+    from: `${senderName} <${senderEmail}>`,
+    to: adOwnerEmail,
+    subject: subject,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2>New Contact Message</h2>
+        <p><strong>From:</strong> ${username || senderName}</p>
+        <p><strong>Email:</strong> ${senderEmail}</p>
+        <p><strong>Advert:</strong> ${adTitle}</p>
+        <hr>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Message:</strong></p>
+        <p style="background:#f9f9f9;padding:15px;border-radius:6px;">${message}</p>
+        <hr>
+        <p style="color:#666;font-size:12px;">Message sent from ${
+          process.env.APP_NAME || "MicroJobs"
+        }</p>
+      </div>
+    `,
+    text: `New Contact Message\n\nFrom: ${
+      username || senderName
+    } (${senderEmail})\nAdvert: ${adTitle}\n\nSubject: ${subject}\n\nMessage:\n${message}`,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Contact message sent to:", adOwnerEmail);
+    return info;
+  } catch (error) {
+    console.error("Error sending contact message:", error);
+    throw error;
+  }
+}

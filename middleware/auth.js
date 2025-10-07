@@ -50,3 +50,22 @@ export const authenticateToken = async (req, res, next) => {
     });
   }
 };
+
+export const authenticateTokenOptional = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return next();
+
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId).select("_id username");
+    if (user)
+      req.user = {
+        id: user._id.toString(),
+        username: user.username,
+      };
+  } catch (error) {
+    console.log(error);
+  }
+  next();
+};

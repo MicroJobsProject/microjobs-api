@@ -28,7 +28,13 @@ import {
   deleteMultipleAdverts,
   getAdvertById,
 } from "./controllers/advertsController.js";
-import { authenticateToken } from "./middleware/auth.js";
+
+import { sendContactMessage } from "./controllers/contactController.js";
+
+import {
+  authenticateToken,
+  authenticateTokenOptional,
+} from "./middleware/auth.js";
 import upload from "./middleware/upload.js";
 /**
  * MONGODB CONNECTION
@@ -55,6 +61,9 @@ app.use("/uploads", express.static("uploads"));
 /**
  * ROUTES
  */
+// Contact routes
+app.post("/api/contact/:advertId", sendContactMessage);
+
 // Auth routes
 app.post("/api/auth/register", register);
 app.post("/api/auth/login", login);
@@ -72,8 +81,8 @@ app.get("/api/user/stats", authenticateToken, getUserStats);
 // Adverts routes
 app.get("/api/adverts/categories", getAdvertCategories);
 app.post("/api/adverts/bulk-delete", authenticateToken, deleteMultipleAdverts);
-app.get("/api/adverts", getAdverts);
-app.get("/api/adverts/:id", getAdvertById);
+app.get("/api/adverts", authenticateTokenOptional, getAdverts);
+app.get("/api/adverts/:id", authenticateTokenOptional, getAdvertById);
 app.post(
   "/api/adverts",
   authenticateToken,
