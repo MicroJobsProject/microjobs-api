@@ -1,3 +1,8 @@
+// DEPENDENCIES
+import { unlink } from "node:fs/promises";
+import path from "node:path";
+import mongoose from "mongoose";
+
 // NATIVE
 import Advert from "../models/Advert.js";
 import Category from "../models/Category.js";
@@ -6,21 +11,35 @@ import User from "../models/User.js";
 export async function getAdverts(req, res, next) {
   try {
     const page = parseInt(req.query.page) || 1;
-
-    const filter = {};
     const limit = parseInt(req.query.limit) || 12;
     const skip = (page - 1) * limit;
+
     const sort = req.query.sort || "-updatedAt";
+    const fields = req.query.fields;
+
+    const filter = {};
     const filterByName = req.query.name;
     const filterByPriceMin = req.query.min;
     const filterByPriceMax = req.query.max;
     const filterByOffer = req.query.offer;
     const filterByCategory = req.query.category;
     const filterByOwner = req.query.owner;
-    const fields = req.query.fields;
+
+    if (page < 1 || limit < 1 || limit > 100) {
+      return res.status(400).json({ error: "Invalid pagination parameters" });
+    }
+
+    if (req.query.min && isNaN(req.query.min)) {
+      return res.status(400).json({ error: "Invalid min price" });
+    }
+
+    if (req.query.max && isNaN(req.query.max)) {
+      return res.status(400).json({ error: "Invalid max price" });
+    }
 
     if (filterByName) {
-      filter.name = { $regex: filterByName, $options: "i" };
+      const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      filter.name = { $regex: escapeRegex(filterByName), $options: "i" };
     }
 
     if (filterByPriceMin) {
@@ -52,7 +71,33 @@ export async function getAdverts(req, res, next) {
       filter.owner = user._id;
     }
 
-    const adverts = await Advert.list(filter, limit, skip, sort, fields);
+    const allowedFields = [
+      "name",
+      "price",
+      "category",
+      "photo",
+      "offer",
+      "description",
+      "updatedAt",
+      "owner",
+      "_id",
+    ];
+
+    const selectedFields = fields
+      ? fields
+          .split(",")
+          .filter((field) => allowedFields.includes(field))
+          .join(" ")
+      : allowedFields.join(" ");
+
+    const adverts = await Advert.list(
+      filter,
+      limit,
+      skip,
+      sort,
+      selectedFields
+    );
+
     const count = await Advert.countDocuments(filter);
     const results = {
       results: adverts,
@@ -71,17 +116,32 @@ export async function getAdverts(req, res, next) {
 export async function getAdvertById(req, res, next) {
   try {
     const advertId = req.params.id;
-    const advert = await Advert.findById(advertId).populate({
-      path: "owner",
-      select: "_id username",
-      options: { strictPopulate: false },
-    });
+
+    if (!mongoose.Types.ObjectId.isValid(advertId)) {
+      return res.status(400).json({ error: "Invalid advert ID format" });
+    }
+
+    const advert = await Advert.findById(advertId)
+      .populate({
+        path: "owner",
+        select: "username _id",
+        options: { strictPopulate: false },
+      })
+      .lean();
 
     if (!advert) {
       return res.status(404).json({ error: "Advert not found" });
     }
 
-    res.json(advert);
+    const isOwner =
+      req.user && advert.owner && advert.owner._id
+        ? advert.owner._id.toString() === req.user.id.toString()
+        : false;
+
+    const { _id, username } = advert.owner || {};
+    const result = { ...advert, owner: { username }, isOwner };
+
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
@@ -90,6 +150,10 @@ export async function getAdvertById(req, res, next) {
 export async function getAdvertCategories(req, res, next) {
   try {
     const categories = await Category.find();
+
+    if (!categories || categories.length === 0) {
+      return res.status(404).json({ error: "No categories found" });
+    }
 
     res.json(categories);
   } catch (error) {
@@ -106,7 +170,7 @@ export async function createAdvert(req, res, next) {
 
     // create advert in memory
     const advert = new Advert(advertData);
-    advert.photo = "/uploads/" + req.file?.filename;
+    advert.photo = req.file ? "/uploads/" + req.file.filename : undefined;
     advert.owner = userId;
 
     // save advert
@@ -162,6 +226,19 @@ export async function deleteAdvert(req, res, next) {
         .json({ error: "Not authorized to delete this advert" });
     }
 
+    if (advert.photo) {
+      const uploadsDir = path.join(process.cwd(), "uploads");
+      const photoPath = path.join(uploadsDir, path.basename(advert.photo));
+
+      try {
+        if (path.basename(advert.photo) !== "undefined") {
+          await unlink(photoPath);
+        }
+      } catch (error) {
+        console.warn("Could not delete photo:", photoPath);
+      }
+    }
+
     await Advert.findByIdAndDelete(id);
 
     res.json({ message: "Advert deleted successfully" });
@@ -173,6 +250,10 @@ export async function deleteAdvert(req, res, next) {
 export async function deleteMultipleAdverts(req, res, next) {
   try {
     const { advertIds } = req.body;
+
+    if (!advertIds.every((id) => mongoose.Types.ObjectId.isValid(id))) {
+      return res.status(400).json({ error: "Invalid advert ID format" });
+    }
 
     if (!Array.isArray(advertIds) || advertIds.length === 0) {
       return res.status(400).json({
@@ -198,6 +279,21 @@ export async function deleteMultipleAdverts(req, res, next) {
       return res.status(404).json({
         error: "Some adverts were not found",
       });
+    }
+
+    for (const advert of adverts) {
+      if (advert.photo) {
+        const uploadsDir = path.join(process.cwd(), "uploads");
+        const photoPath = path.join(uploadsDir, path.basename(advert.photo));
+
+        try {
+          if (path.basename(advert.photo) !== "undefined") {
+            await unlink(photoPath);
+          }
+        } catch (err) {
+          console.warn("Could not delete photo:", photoPath);
+        }
+      }
     }
 
     const result = await Advert.deleteMany({

@@ -99,7 +99,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 0,
       offer: true,
-      category: "plumbing",
+      category: "Plumbing",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -108,7 +108,7 @@ async function initAdverts() {
       owner: user._id,
       price: 9.99,
       offer: false,
-      category: "electrician",
+      category: "Electrician",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -117,7 +117,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 30,
       offer: true,
-      category: "gardening",
+      category: "Gardening",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit.",
     },
@@ -126,7 +126,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 10,
       offer: false,
-      category: "plumbing",
+      category: "Plumbing",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque.",
     },
@@ -135,7 +135,7 @@ async function initAdverts() {
       owner: user._id,
       price: 15,
       offer: false,
-      category: "plumbing",
+      category: "Plumbing",
       description:
         "Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -144,7 +144,7 @@ async function initAdverts() {
       owner: user._id,
       price: 55,
       offer: false,
-      category: "painting",
+      category: "Painting",
       description:
         "Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -153,7 +153,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 40,
       offer: true,
-      category: "electrician",
+      category: "Electrician",
       description:
         "Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -162,7 +162,7 @@ async function initAdverts() {
       owner: user._id,
       price: 5,
       offer: true,
-      category: "pets",
+      category: "Pets",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam.",
     },
@@ -171,7 +171,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 10,
       offer: true,
-      category: "gardening",
+      category: "Gardening",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo.",
     },
@@ -180,7 +180,7 @@ async function initAdverts() {
       owner: user._id,
       price: 10,
       offer: false,
-      category: "cleaning",
+      category: "Cleaning",
       description:
         "Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -189,7 +189,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 12,
       offer: true,
-      category: "gardening",
+      category: "Gardening",
       description:
         "Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque.",
     },
@@ -198,7 +198,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 35,
       offer: false,
-      category: "transport",
+      category: "Transport",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -207,7 +207,7 @@ async function initAdverts() {
       owner: user._id,
       price: 25,
       offer: true,
-      category: "transport",
+      category: "Transport",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt. Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -216,7 +216,7 @@ async function initAdverts() {
       owner: user._id,
       price: 7,
       offer: true,
-      category: "private classes",
+      category: "Private Classes",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },
@@ -225,7 +225,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 30,
       offer: true,
-      category: "painting",
+      category: "Painting",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget enim sollicitudin, laoreet sem vel, pulvinar leo. Morbi nibh elit, congue vitae tempor nec, eleifend ut ante. Nullam aliquam ligula eu est pulvinar, vel ultrices tortor tincidunt.",
     },
@@ -234,7 +234,7 @@ async function initAdverts() {
       owner: admin._id,
       price: 8,
       offer: false,
-      category: "technology",
+      category: "Technology",
       description:
         "Praesent ac blandit eros, eget scelerisque quam. Etiam nec eros pulvinar, ornare quam eget, aliquam purus. Nullam egestas scelerisque magna non scelerisque. Proin eu sem finibus, ultrices lectus id, ornare velit. Fusce nisl dui, vehicula non eleifend et, hendrerit vitae diam.",
     },

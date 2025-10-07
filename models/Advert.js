@@ -23,7 +23,11 @@ const advertSchema = new Schema(
  * LIST ADVERTS
  */
 advertSchema.statics.list = function (filter, limit, skip, sort, fields) {
-  const query = Advert.find(filter).populate("owner", "username");
+  const query = Advert.find(filter).populate({
+    path: "owner",
+    select: "username -_id",
+    options: { strictPopulate: false },
+  });
 
   query.limit(limit);
   query.skip(skip);
