@@ -111,7 +111,10 @@ export async function createAdvert(req, res, next) {
 
     // create advert in memory
     const advert = new Advert(advertData);
-    advert.photo ? "/uploads/" + req.file?.filename : undefined;
+    if (req.file) {
+      advert.photo = "/uploads/" + req.file.filename;
+    }
+
     advert.owner = userId;
 
     // save advert
