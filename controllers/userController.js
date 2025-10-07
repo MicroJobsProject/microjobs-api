@@ -1,8 +1,12 @@
-//DEPENDENCIES
+// DEPENDENCIES
+import { unlink } from "node:fs/promises";
+import path from "node:path";
+
+// NATIVE
 import User from "../models/User.js";
 import Advert from "../models/Advert.js";
 
-//GET PROFILE CONTROLLER==========================================================================================
+// GET PROFILE CONTROLLER==========================================================================================
 export async function getProfile(req, res) {
   try {
     const userId = req.user.id;
@@ -29,7 +33,7 @@ export async function getProfile(req, res) {
   }
 }
 
-//UPDATE PROFILE CONTROLLER==========================================================================================
+// UPDATE PROFILE CONTROLLER==========================================================================================
 export async function updateProfile(req, res) {
   try {
     const { username, email } = req.body;
@@ -41,7 +45,6 @@ export async function updateProfile(req, res) {
       });
     }
 
-    // Verify duplicate email
     if (email) {
       const existingEmail = await User.findOne({
         email,
@@ -55,7 +58,6 @@ export async function updateProfile(req, res) {
       }
     }
 
-    // Check for duplicate username
     if (username) {
       const existingUsername = await User.findOne({
         username,
@@ -96,7 +98,7 @@ export async function updateProfile(req, res) {
   }
 }
 
-//CHANGE PASSWORD CONTROLLER==========================================================================================
+// CHANGE PASSWORD CONTROLLER==========================================================================================
 export async function changePasswordController(req, res) {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -140,7 +142,7 @@ export async function changePasswordController(req, res) {
   }
 }
 
-//DELETE ACCOUNT CONTROLLER==========================================================================================
+// DELETE ACCOUNT CONTROLLER==========================================================================================
 export async function deleteAccountController(req, res) {
   try {
     const { password } = req.body;
@@ -164,10 +166,25 @@ export async function deleteAccountController(req, res) {
       });
     }
 
-    // Delete all user ads first
-    await Advert.deleteMany({ owner: userId });
+    const userAdverts = await Advert.find({ owner: userId });
+    const uploadsDir = path.join(process.cwd(), "uploads");
 
-    // Delete user
+    for (const advert of userAdverts) {
+      if (advert.photo) {
+        const photoPath = path.join(uploadsDir, path.basename(advert.photo));
+
+        try {
+          if (path.basename(advert.photo) !== "undefined") {
+            await unlink(photoPath);
+            console.log(`Deleted photo: ${photoPath}`);
+          }
+        } catch (error) {
+          console.warn(`Could not delete photo: ${photoPath}`, error.message);
+        }
+      }
+    }
+
+    await Advert.deleteMany({ owner: userId });
     await User.findByIdAndDelete(userId);
 
     res.status(200).json({
@@ -181,11 +198,10 @@ export async function deleteAccountController(req, res) {
   }
 }
 
-//GET USER STATS CONTROLLER==========================================================================================
+// GET USER STATS CONTROLLER==========================================================================================
 export async function getUserStats(req, res) {
   try {
     const userId = req.user.id;
-
     const advertCount = await Advert.countDocuments({ owner: userId });
 
     res.status(200).json({
