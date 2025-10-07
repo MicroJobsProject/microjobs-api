@@ -124,7 +124,7 @@ export async function getAdvertById(req, res, next) {
     const advert = await Advert.findById(advertId)
       .populate({
         path: "owner",
-        select: "username -_id",
+        select: "username _id",
         options: { strictPopulate: false },
       })
       .lean();
@@ -138,7 +138,8 @@ export async function getAdvertById(req, res, next) {
         ? advert.owner._id.toString() === req.user.id.toString()
         : false;
 
-    const result = { ...advert, isOwner };
+    const { _id, username } = advert.owner || {};
+    const result = { ...advert, owner: { username }, isOwner };
 
     res.status(200).json(result);
   } catch (error) {
