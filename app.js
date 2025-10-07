@@ -28,6 +28,9 @@ import {
   deleteMultipleAdverts,
   getAdvertById,
 } from "./controllers/advertsController.js";
+
+import { sendContactMessage } from "./controllers/contactController.js";
+
 import {
   authenticateToken,
   authenticateTokenOptional,
@@ -58,6 +61,9 @@ app.use("/uploads", express.static("uploads"));
 /**
  * ROUTES
  */
+// Contact routes
+app.post("/api/contact/:advertId", sendContactMessage);
+
 // Auth routes
 app.post("/api/auth/register", register);
 app.post("/api/auth/login", login);
