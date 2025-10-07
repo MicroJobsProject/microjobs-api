@@ -1,3 +1,8 @@
+// DEPENDENCIES
+import { unlink } from "node:fs/promises";
+import path from "node:path";
+import mongoose from "mongoose";
+
 // NATIVE
 import Advert from "../models/Advert.js";
 import Category from "../models/Category.js";
@@ -162,6 +167,19 @@ export async function deleteAdvert(req, res, next) {
         .json({ error: "Not authorized to delete this advert" });
     }
 
+    if (advert.photo) {
+      const uploadsDir = path.join(process.cwd(), "uploads");
+      const photoPath = path.join(uploadsDir, path.basename(advert.photo));
+
+      try {
+        if (path.basename(advert.photo) !== "undefined") {
+          await unlink(photoPath);
+        }
+      } catch (error) {
+        console.warn("Could not delete photo:", photoPath);
+      }
+    }
+
     await Advert.findByIdAndDelete(id);
 
     res.json({ message: "Advert deleted successfully" });
@@ -178,6 +196,10 @@ export async function deleteMultipleAdverts(req, res, next) {
       return res.status(400).json({
         error: "advertIds must be a non-empty array",
       });
+    }
+
+    if (!advertIds.every((id) => mongoose.Types.ObjectId.isValid(id))) {
+      return res.status(400).json({ error: "Invalid advert ID format" });
     }
 
     const adverts = await Advert.find({
@@ -198,6 +220,21 @@ export async function deleteMultipleAdverts(req, res, next) {
       return res.status(404).json({
         error: "Some adverts were not found",
       });
+    }
+
+    for (const advert of adverts) {
+      if (advert.photo) {
+        const uploadsDir = path.join(process.cwd(), "uploads");
+        const photoPath = path.join(uploadsDir, path.basename(advert.photo));
+
+        try {
+          if (path.basename(advert.photo) !== "undefined") {
+            await unlink(photoPath);
+          }
+        } catch (err) {
+          console.warn("Could not delete photo:", photoPath);
+        }
+      }
     }
 
     const result = await Advert.deleteMany({
