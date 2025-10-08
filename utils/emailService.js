@@ -56,6 +56,9 @@ export async function sendPasswordResetEmail({ email, username, resetUrl }) {
 
   const transporter = await getTransporter();
 
+  const logoUrl =
+    "https://raw.githubusercontent.com/MicroJobsProject/microjobs/0c9f37c258394f3317c8434e6568cfd8feaf8385/src/assets/microjobs.svg";
+
   const expirationHours =
     parseInt(process.env.PASSWORD_RESET_TOKEN_EXPIRATION_HOURS) || 1;
   const expirationText =
@@ -68,22 +71,46 @@ export async function sendPasswordResetEmail({ email, username, resetUrl }) {
     to: email,
     subject: `Password Reset - ${process.env.APP_NAME || "MicroJobs"}`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2>Password Reset Request</h2>
-        <p>Hi ${username},</p>
-        <p>You requested to reset your password. Click the button below:</p>
+      <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color:#f9fafb; padding:24px;">
+        <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; padding:24px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+          <div style="text-align:center; margin-bottom:20px;">
+            <img src="${logoUrl}" alt="${
+      process.env.APP_NAME || "MicroJobs"
+    }" width="120" style="display:inline-block; object-fit:contain;" />
+          </div>
+          <h2 style="color:#0f172a; font-size:20px; margin:0 0 16px;">Password Reset Request</h2>
+        <p style="font-size:15px; color:#334155;">Hi <strong>${username}</strong>,</p>
+        <p style="font-size:15px; color:#334155;">You requested to reset your password. Click the button below:</p>
         <a href="${resetUrl}" style="display:inline-block;padding:12px 24px;background-color:#917127;color:white;text-decoration:none;border-radius:4px;margin:20px 0;">Reset Password</a>
-        <p>Or copy this link:</p>
-        <p style="background:#f0f0f0;padding:10px;word-break:break-all;">${resetUrl}</p>
-        <p><strong>This link expires in ${expirationText}.</strong></p>
-        <p>If you didn't request this, please ignore this email.</p>
+        <p style="margin:10px 0 8px; font-size:15px; color:#334155;">Or copy this link:</p>
+        <p style="background:#f1f5f9; border-radius:8px; padding:16px; font-size:14px; color:#1e293b; line-height:1.5; word-break:break-all;">${resetUrl}</p>
+        <p style="margin-bottom:16px; font-size:14px; color:#475569;"><strong>This link expires in ${expirationText}.</strong></p>
+        <p style="margin-top:20px; font-size:12px; color:#666;">
+            This message was sent via <strong>${
+              process.env.APP_NAME || "MicroJobs"
+            }</strong>.  
+            If you believe this is an error, you can safely ignore it.
+          </p>
         <hr style="margin:30px 0;border:none;border-top:1px solid #ccc;">
         <p style="color:#666;font-size:12px;">${
           process.env.APP_NAME || "MicroJobs"
         } - ${new Date().getFullYear()}</p>
+        </div>
       </div>
     `,
-    text: `Password Reset Request\n\nHi ${username},\n\nReset your password here: ${resetUrl}\n\nThis link expires in ${expirationText}.\n\nIf you didn't request this, ignore this email.`,
+    text: `
+      Password Reset Request
+      \n\n
+      Hi ${username},
+      \n\n
+      Reset your password here: ${resetUrl}
+      \n\n
+      This link expires in ${expirationText}.
+      \n\n
+      If you didn't request this, ignore this email.
+      \n\n
+      Sent via MicroJobs.
+    `,
   };
 
   try {
@@ -110,29 +137,75 @@ export async function sendContactMessageEmail({
 }) {
   const transporter = await getTransporter();
 
+  const logoUrl =
+    "https://raw.githubusercontent.com/MicroJobsProject/microjobs/0c9f37c258394f3317c8434e6568cfd8feaf8385/src/assets/microjobs.svg";
+
   const mailOptions = {
-    from: `${senderName} <${senderEmail}>`,
+    from: `${process.env.APP_NAME || "MicroJobs"} <${
+      process.env.EMAIL_USER || "no-reply@microjobs.test"
+    }>`,
+    replyTo: `${senderName} <${senderEmail}>`,
     to: adOwnerEmail,
-    subject: subject,
+    subject: `New Contact Message - ${process.env.APP_NAME || "MicroJobs"}`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2>New Contact Message</h2>
-        <p><strong>From:</strong> ${username || senderName}</p>
-        <p><strong>Email:</strong> ${senderEmail}</p>
-        <p><strong>Advert:</strong> ${adTitle}</p>
-        <hr>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p style="background:#f9f9f9;padding:15px;border-radius:6px;">${message}</p>
-        <hr>
-        <p style="color:#666;font-size:12px;">Message sent from ${
-          process.env.APP_NAME || "MicroJobs"
-        }</p>
+      <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color:#f9fafb; padding:24px;">
+        <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; padding:24px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+          <div style="text-align:center; margin-bottom:20px;">
+            <img src="${logoUrl}" alt="${
+      process.env.APP_NAME || "MicroJobs"
+    }" width="120" style="display:inline-block; object-fit:contain;" />
+          </div>
+          <h2 style="color:#0f172a; font-size:20px; margin:0 0 16px;">📬 Someone sent you a message!</h2>
+          
+          <p style="margin:0 0 8px; font-size:15px; color:#334155;">
+            You’ve received a new message regarding your advert:
+          </p>
+          <p style="margin:0 0 16px; font-weight:600; color:#917127; font-size:16px;">
+            “${adTitle}”
+          </p>
+
+          <table style="width:100%; margin-bottom:16px; font-size:14px; color:#475569;">
+            <tr><td style="padding:4px 0;"><strong>From:</strong> ${
+              username || senderName
+            }</td></tr>
+            <tr><td style="padding:4px 0;"><strong>Reply To:</strong> Simply use the function "Reply" in your Email client.</td></tr>
+            <tr><td><hr style="margin:22px 0;border:none;border-top:1px solid #ccc;"></td></tr>
+            <tr><td style="padding:4px 0;"><strong>Subject:</strong> ${subject}</td></tr>
+          </table>
+          <div style="background:#f1f5f9; border-radius:8px; padding:16px; font-size:14px; font-style:italic; color:#1e293b; line-height:1.5; word-break:break-all;">
+            ${message}
+          </div>
+
+          <p style="margin-top:20px; font-size:12px; color:#666;">
+            This message was sent via <strong>${
+              process.env.APP_NAME || "MicroJobs"
+            }</strong>.  
+            If you believe this is an error, you can safely ignore it.
+          </p>
+          <hr style="margin:30px 0;border:none;border-top:1px solid #ccc;">
+          <p style="color:#666;font-size:12px;">
+              © ${
+                process.env.APP_NAME || "MicroJobs"
+              } - ${new Date().getFullYear()}
+          </p>
+        </div>
       </div>
     `,
-    text: `New Contact Message\n\nFrom: ${
-      username || senderName
-    } (${senderEmail})\nAdvert: ${adTitle}\n\nSubject: ${subject}\n\nMessage:\n${message}`,
+    text: `
+      New message for your advert "${adTitle}"
+      \n\n
+      From: ${username || senderName}\n
+      Subject: ${subject}\n
+      \n\n
+      Message:\n
+      ${message}
+      \n\n
+      Reply directly to this email to contact the sender.
+      \n\n
+      If you didn't request this, ignore this email.
+      \n\n
+      Sent via MicroJobs.
+    `,
   };
 
   try {
