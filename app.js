@@ -58,9 +58,11 @@ app.use(
 );
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+
 /**
  * ROUTES
  */
+
 // Contact routes
 app.post("/api/contact/:advertId", sendContactMessage);
 
@@ -81,8 +83,7 @@ app.get("/api/user/stats", authenticateToken, getUserStats);
 // Adverts routes
 app.get("/api/adverts/categories", getAdvertCategories);
 app.post("/api/adverts/bulk-delete", authenticateToken, deleteMultipleAdverts);
-app.get("/api/adverts", authenticateTokenOptional, getAdverts);
-app.get("/api/adverts/:id", authenticateTokenOptional, getAdvertById);
+
 app.post(
   "/api/adverts",
   authenticateToken,
@@ -90,9 +91,11 @@ app.post(
   createAdvert
 );
 
-//Temporary code to fix errors=================================================
+app.get("/api/adverts/:id", authenticateTokenOptional, getAdvertById);
 app.put("/api/adverts/:id", authenticateToken, updateAdvert);
 app.delete("/api/adverts/:id", authenticateToken, deleteAdvert);
+
+app.get("/api/adverts", authenticateTokenOptional, getAdverts);
 
 app.use(notFoundHandler);
 app.use(errorHandler);
