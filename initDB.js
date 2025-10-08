@@ -116,7 +116,7 @@ async function initAdverts() {
       category: "Plumbing",
       description:
         "Quick and affordable plumbing service for small leaks, dripping taps, and minor bathroom issues. I provide same-day visits in most areas and always clean up after finishing the job. If you are struggling with water pressure or need to replace a tap, don't hesitate to contact me. Over five years of experience with guaranteed satisfaction and transparent pricing.",
-      photo: "/uploads/1759838101001-plumbing-leak.jpg",
+      photo: "/uploads/1759838101001-plumbing-leak.webp",
     },
     {
       name: "Professional home cleaning",
@@ -126,7 +126,7 @@ async function initAdverts() {
       category: "Cleaning",
       description:
         "Reliable house cleaning with eco-friendly products. Weekly or one-time jobs available. My service includes dusting, mopping, and kitchen and bathroom cleaning. I also offer laundry and ironing upon request. I bring all cleaning materials with me, so you can relax and return to a spotless home.",
-      photo: "/uploads/1759838101022-home-cleaning.jpg",
+      photo: "/uploads/1759838101022-home-cleaning.webp",
     },
     {
       name: "Electrician for light installations",
@@ -136,7 +136,7 @@ async function initAdverts() {
       category: "Electrician",
       description:
         "Certified electrician available for lighting, outlets, and small electrical repairs. I can replace old fixtures, add new switches, or troubleshoot power issues in your home. My work is neat and compliant with local safety standards. Emergency calls available on weekends.",
-      photo: "/uploads/1759838101039-electrician-installation.jpg",
+      photo: "/uploads/1759838101039-electrician-installation.webp",
     },
     {
       name: "Pet walking in my neighborhood",
@@ -155,7 +155,7 @@ async function initAdverts() {
       category: "Private Classes",
       description:
         "Improve your English level quickly with personal tutoring sessions. Lessons are customized based on your goals—grammar, pronunciation, or conversation practice. I have over 3 years of teaching experience with students from various backgrounds. Online or in-person classes available.",
-      photo: "/uploads/1759838101057-private-english.jpg",
+      photo: "/uploads/1759838101057-private-english.webp",
     },
     {
       name: "Local moving service with van",
@@ -165,7 +165,7 @@ async function initAdverts() {
       category: "Transport",
       description:
         "I am moving and need a van to transport my belongings. I don't have much furniture and no appliances; most of my belongings will be personal boxes. I can provide protective blankets, as I have some delicate items, so I would prefer someone who takes safety measures to secure your items or who drives very carefully.\n\nI'm very busy at work, so I can only respond to messages on weekends. It is essential that you are punctual if we agree on a date and time.",
-      photo: "/uploads/1759838101078-local-moving.jpg",
+      photo: "/uploads/1759838101078-local-moving.webp",
     },
     {
       name: "Garden maintenance and plant care",
@@ -184,7 +184,7 @@ async function initAdverts() {
       category: "Technology",
       description:
         "PC setup, antivirus installation, and performance optimization. If your computer runs slowly, I can help with software cleanup, driver updates, and basic hardware checks. Ideal for home offices or personal laptops needing a fresh start.",
-      photo: "/uploads/1759838101112-computer-setup.jpg",
+      photo: "/uploads/1759838101112-computer-setup.webp",
     },
     {
       name: "Baby care and babysitting evenings",
@@ -203,7 +203,7 @@ async function initAdverts() {
       category: "Painting",
       description:
         "Give your old furniture a new life with custom painting and finish.\n\nI specialize in restoring wooden chairs, tables, and cabinets using high-quality paints. Each project includes surface preparation, sanding, and varnish protection for long-lasting results.",
-      photo: "/uploads/1759838101130-furniture-painting.jpg",
+      photo: "/uploads/1759838101130-furniture-painting.webp",
     },
     {
       name: "Fitness training at home",
@@ -222,7 +222,7 @@ async function initAdverts() {
       category: "Pets",
       description:
         "I need a professional for small and medium-sized pets. I have two dogs, a Chihuahua and a Labrador. Services should include washing, brushing, nail trimming, and ear cleaning. A calm and spacious environment is guaranteed.\n\nPrevious experience is a minimum requirement to avoid stressing my animals.",
-      photo: "/uploads/1759838101147-pet-grooming.jpg",
+      photo: "/uploads/1759838101147-pet-grooming.webp",
     },
     {
       name: "Website development for small business",
@@ -232,7 +232,7 @@ async function initAdverts() {
       category: "Technology",
       description:
         "Modern, responsive websites with SEO setup and analytics tracking. I work with small businesses, freelancers, and startups. Every site includes mobile optimization, contact forms, and Google integration. Fast turnaround and ongoing maintenance options available.",
-      photo: "/uploads/1759838101163-web-development.jpg",
+      photo: "/uploads/1759838101163-web-development.webp",
     },
     {
       name: "Flower bed planting and trimming",
@@ -251,7 +251,7 @@ async function initAdverts() {
       category: "Electrician",
       description:
         "I need a professional installation for my air conditioning units. I need it before summer starts.",
-      photo: "/uploads/1759838101181-air-conditioning.jpg",
+      photo: "/uploads/1759838101181-air-conditioning.webp",
     },
     {
       name: "Photography for family events",
@@ -261,7 +261,7 @@ async function initAdverts() {
       category: "Video & Photography",
       description:
         "High-quality event and family photography with natural light. I capture candid and posed shots for birthdays, baptisms, and small weddings. Edited photos are delivered digitally within 48 hours. Prints available upon request.",
-      photo: "/uploads/1759838101199-family-photography.jpg",
+      photo: "/uploads/1759838101199-family-photography.webp",
     },
     {
       name: "Elderly home care assistance",
@@ -289,7 +289,7 @@ async function initAdverts() {
       category: "Plumbing",
       description:
         "The sink in our bathroom has a very old faucet and for some reason it is difficult to get water to come out. We need the pipe to be checked for leaks, and while you're at it, install a new faucet that we bought on Amazon. The price is non-negotiable.",
-      photo: "/uploads/1759838101217-bathroom-plumbing.jpg",
+      photo: "/uploads/1759838101217-bathroom-plumbing.webp",
     },
     {
       name: "After-party home cleaning",
@@ -299,7 +299,7 @@ async function initAdverts() {
       category: "Cleaning",
       description:
         "Deep cleaning for kitchens, living rooms and bathrooms after events. Includes trash removal, floor mopping, and surface disinfecting. Fast turnaround to restore your home the next morning. I bring all cleaning supplies.",
-      photo: "/uploads/1759838101234-party-cleaning.jpg",
+      photo: "/uploads/1759838101234-party-cleaning.webp",
     },
     {
       name: "Math tutoring for high school",
@@ -318,7 +318,7 @@ async function initAdverts() {
       category: "Video & Photography",
       description:
         "I want to be a content creator on YouTube, but I have no idea how to edit videos to add cool effects. I had thought about a cooking channel. I have the equipment to record myself, but I need someone to help me make cool edits.\n\nIf you are interested, please send me some examples of your work so I can evaluate it. Thank you!",
-      photo: "/uploads/1759838101251-video-editing.jpg",
+      photo: "/uploads/1759838101251-video-editing.webp",
     },
     {
       name: "Home office cable management",
@@ -337,7 +337,7 @@ async function initAdverts() {
       category: "Painting",
       description:
         "I need advice on cleaning walls and quick painting, and color recommendations are also appreciated. I want to paint my son's room before he starts school, so I would like odorless paint to be used and the furniture to be protected during the process. Please use long-lasting paint; I will not accept cheap paint.",
-      photo: "/uploads/1759838101269-wall-painting.jpg",
+      photo: "/uploads/1759838101269-wall-painting.webp",
     },
     {
       name: "Laptop hardware upgrade",
@@ -347,7 +347,7 @@ async function initAdverts() {
       category: "Technology",
       description:
         "RAM, SSD, and fan replacements for laptops and desktops. I can also clean internal components and reinstall your operating system for better performance. Quick turnaround and data safety guaranteed.",
-      photo: "/uploads/1759838101287-laptop-upgrade.jpg",
+      photo: "/uploads/1759838101287-laptop-upgrade.webp",
     },
     {
       name: "Dog training for basic commands",
@@ -384,7 +384,7 @@ async function initAdverts() {
       category: "Cleaning",
       description:
         "Streak-free window and glass cleaning for small offices and commercial spaces. I use professional-grade tools and solutions to leave your glass spotless. Service available early mornings or late evenings to avoid business interruptions.",
-      photo: "/uploads/1759838101323-window-cleaning.jpg",
+      photo: "/uploads/1759838101323-window-cleaning.webp",
     },
   ]);
   console.log(`+ INSERTED ${insertResult.length} adverts`);
