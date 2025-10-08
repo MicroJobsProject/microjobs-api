@@ -14,7 +14,7 @@ export async function getAdverts(req, res, next) {
     const limit = parseInt(req.query.limit) || 12;
     const skip = (page - 1) * limit;
 
-    const sort = req.query.sort || "-updatedAt";
+    let sort = req.query.sort || { createdAt: -1, _id: -1 };
     const fields = req.query.fields;
 
     const filter = {};
@@ -25,8 +25,13 @@ export async function getAdverts(req, res, next) {
     const filterByCategory = req.query.category;
     const filterByOwner = req.query.owner;
 
-    if (page < 1 || limit < 1 || limit > 100) {
+    if (page < 1 || limit < 1 || limit > 20) {
       return res.status(400).json({ error: "Invalid pagination parameters" });
+    }
+
+    if (req.query.sort) {
+      const [field, dir] = req.query.sort.split(":");
+      sort = { [field]: dir === "asc" ? 1 : -1, _id: -1 };
     }
 
     if (req.query.min && isNaN(req.query.min)) {
